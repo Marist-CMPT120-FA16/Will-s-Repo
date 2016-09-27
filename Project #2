@@ -1,6 +1,36 @@
+<!DOCTYPE html>
 <html>
-   <head>
-      <title>
-         Will's Game
-      </title>
-      
+<head>
+<script>
+function myNorthFunction() {
+   window.alert("test");
+}
+
+function textDisplay(text) {
+	
+
+
+} 
+</script>
+</head>
+
+
+
+
+
+
+<body>
+
+<p>Will's Game!</p>
+
+<p><textarea id="taMain" rows="10" cols="40"></textarea></p>
+
+
+<button onclick="myNorthFunction()">North</button>
+<button onclick="mySouthFunction()">South</button>
+<button onclick="myEastFunction()">East</button>
+<button onclick="myWestFunction()">West</button>
+
+ </body>
+</html>
+
