@@ -2,15 +2,65 @@
 <html>
 <head>
 <script>
+var firstNorth = false;
+var firstSouth = false;
+var firstWest = false;
+var firstEast = false;
+
+var northPress = 0;
+
+var currentLocation = "center";
+
+var points = 0;
+
 function myNorthFunction() {
-   window.alert("test");
+   if(firstNorth == false && currentLocation == "center"){
+		points += 5;
+		firstNorth = true;
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou are now in the North.";
+		currentLocation = "north";
+   }else if(currentLocation == "north"){
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou can't go here.";
+   }//Do something if current location is south
 }
 
-function textDisplay(text) {
+
+function mySouthFunction() {
+   if(firstSouth == false && currentLocation == "center"){
+		points += 5;
+		firstSouth = true;
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou are now in the South.";
+		currentLocation = "south";
+   }else if(currentLocation == "south"){
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou can't go here.";
+   }//Do something if current location is north
+}
+
+function myEastFunction() {
+   if(firstEast == false){
+		points += 5;
+		firstEast = true;
+   }
+   document.getElementById('points').innerHTML = "Points: " + points;
+   document.getElementById('taMain').value += "\nYou are now in the East.";
+}
+
+function myWestFunction() {
+   if(firstWest == false){
+		points += 5;
+		firstWest = true;
+   }
+   document.getElementById('points').innerHTML = "Points: " + points;
+   document.getElementById('taMain').value += "\nYou are now in the West.";
+}
 	
 
 
-} 
+
 </script>
 </head>
 
@@ -22,8 +72,9 @@ function textDisplay(text) {
 <body>
 
 <p>Will's Game!</p>
+<h1 id = "points">Points: 0</h1>
 
-<p><textarea id="taMain" rows="10" cols="40"></textarea></p>
+<p><textarea id="taMain" rows="10" cols="40">You are in the starting area</textarea></p>
 
 
 <button onclick="myNorthFunction()">North</button>
