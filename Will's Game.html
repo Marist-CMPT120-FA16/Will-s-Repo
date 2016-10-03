@@ -6,39 +6,9 @@ var firstNorth = false;
 var firstSouth = false;
 var firstWest = false;
 var firstEast = false;
-
 var northPress = 0;
-
 var currentLocation = "center";
-
 var points = 0;
-
-var xlocation = 0;
-
-var ylocation = 0;
-
-var taMain = document.getElementById('taMain');
-
-
-
-
-
-function LocationGetter() {
-  if(xlocation = -1){
-  taMain = "You are in the West."
-  }
-  else if(xlocation = 1){
-  taMain = "You are in the East."
-  }
-  else if(ylocation = 1){
-  }
-  taMain= "You are in the North."
-  else if (ylocation = -1){
-  taMain= "You are in the South."
-  {
-  
-}
-
 function myNorthFunction() {
    if(firstNorth == false && currentLocation == "center"){
 		points += 5;
@@ -49,10 +19,13 @@ function myNorthFunction() {
    }else if(currentLocation == "north"){
 		document.getElementById('points').innerHTML = "Points: " + points;
 		document.getElementById('taMain').value += "\nYou can't go here.";
-   }//Do something if current location is south
+   }else if(currentLocation =="south"){
+		document.getElementById('taMain').value += "\nYou are back in center."
+		currentLocation ="center"
+		}
+	
+	
 }
-
-
 function mySouthFunction() {
    if(firstSouth == false && currentLocation == "center"){
 		points += 5;
@@ -63,29 +36,30 @@ function mySouthFunction() {
    }else if(currentLocation == "south"){
 		document.getElementById('points').innerHTML = "Points: " + points;
 		document.getElementById('taMain').value += "\nYou can't go here.";
-   }//Do something if current location is north
+   }else if(currentLocation ="north"){
+		document.getElementById('taMain').value +="\nYou are back in center.";
+		currentLocation = "center"
+		}
+		
 }
-
 function myEastFunction() {
-   if(firstEast == false){
+   if(firstEast == false && currentLocation == "center"){
 		points += 5;
 		firstEast = true;
+        }
+		document.getElementById('points').innerHTML = "Points: " + points;
+        document.getElementById('taMain').value += "\nYou are now in the East.";
+		currentLocation = "east";
+   }
+function myWestFunction() {
+   if(firstWest == false){
+		points += 5;
+		firstWest = true;
    }
    document.getElementById('points').innerHTML = "Points: " + points;
-   document.getElementById('taMain').value += "\nYou are now in the East.";
+   document.getElementById('taMain').value += "\nYou are now in the West.";
 }
-
-function myWestFunction() {
-  if(xlocation != 1 || xlocation !=0) {
-	taMain = "You can't go here"
-	}
-	else {
-	xlocation = xlocation-1;
-	LocationGetter();
-	}
-
-
-
+	
 </script>
 </head>
 
