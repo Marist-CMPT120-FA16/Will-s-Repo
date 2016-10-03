@@ -19,14 +19,21 @@ function myNorthFunction() {
    }else if(currentLocation == "north"){
 		document.getElementById('points').innerHTML = "Points: " + points;
 		document.getElementById('taMain').value += "\nYou can't go here.";
+        current.location ="undefined"
    }else if(currentLocation =="south"){
 		document.getElementById('taMain').value += "\nYou are back in center.";
 		currentLocation ="center";
    }else if(currentLocation ="east"){
 	    document.getElementById('taMain').value += "\nYou can't go here.";
+        current.location ="undefined"
    }else if(currentLocation ="west"){
 	    document.getElementById('taMain').value += "\nYou can't go here."
-	}
+		current.location ="undefined"
+   }else if(currentLocation ="center"){
+         document.getElemenyById('taMain').value +="\nYou are now in the North.";
+   }else if(currentLocation ="undefined"){
+         document.getElementById('taMain').value +="\nYou can't go here."
+		 }
 }
 function mySouthFunction() {
    if(firstSouth == false && currentLocation == "center"){
@@ -38,13 +45,22 @@ function mySouthFunction() {
    }else if(currentLocation == "south"){
 		document.getElementById('points').innerHTML = "Points: " + points;
 		document.getElementById('taMain').value += "\nYou can't go here.";
+        current.location ="undefined"  
    }else if(currentLocation ="north"){
 		document.getElementById('taMain').value +="\nYou are back in center.";
 		currentLocation = "center"
    }else if(currentLocation = "east"){
         document.getElementById('taMain').value +="\nYou can't go here.";
-   }	
-		}
+        current.location ="undefined"
+   }else if(currentLocation ="west"){
+	    document.getElementById('taMain').value +="\nYou can't go here.";
+        current.location ="undefined"
+   }else if(currentLocation ="center"){
+         document.getElementById('taMain').value +="\nYou are now in the South.";
+   }else if(currentLocation ="undefined"){
+         document.getElementById('taMain').value +="\nYou can't go here."
+		 }	
+}
 		
 function myEastFunction() {
     if(firstEast == false && currentLocation == "center"){
@@ -56,14 +72,25 @@ function myEastFunction() {
    }else if(currentLocation == "east"){
 		document.getElementById('points').innerHTML = "Points: " + points;
 		document.getElementById('taMain').value += "\nYou can't go here.";
+        current.location ="undefined"
    }else if(currentLocation ="west"){
 		document.getElementById('taMain').value +="\nYou are back in center.";
 		currentLocation = "center"
    }else if(currentLocation ="north"){
 		document.getElementById('taMain').value += "\nYou can't go here.";
-       } 
-	   
-}
+        current.location ="undefined"  
+   }else if(currentLocation ="south"){
+		current.location ="undefined"
+		document.getElementById('taMain').value += "\nYou can't go here.";
+   }else if(currentLocation = "center"){
+	    document.getElementById('taMain').value += "\nYou are now in the East.";
+		current.Location ="east";
+   }else if(currentLocation ="undefined"){
+         document.getElementById('taMain').value +="\nYou can't go here."
+		 }	
+		
+		
+}			   
 function myWestFunction() {
     if(firstWest == false && currentLocation == "center"){
 		points += 5;
@@ -74,14 +101,25 @@ function myWestFunction() {
    }else if(currentLocation == "west"){
 		document.getElementById('points').innerHTML = "Points: " + points;
 		document.getElementById('taMain').value += "\nYou can't go here.";
+        current.location ="undefined"
    }else if(currentLocation ="east"){
 		document.getElementById('taMain').value +="\nYou are back in center.";
 		currentLocation = "center"
-   }else if(currentLocation ="south"){
+   }else if(currentLocation =="south"){
         document.getElementById('taMain').value +="\nYou can't go here.";
-   
-   }	
-		}
+        current.location ="undefined"  
+   }else if(currentLocation =="north"){
+        document.getElementById('taMain').value +="\nYou can't go here.";
+        current.location ="undefined"  
+   }else if(current.Location =="center"){
+	    document.getElementById('taMain').value +="\nYou are now in the West.";
+		currentLocation ="west";
+   }else if(currentLocation ="undefined"){
+         document.getElementById('taMain').value +="\nYou can't go here."
+		 }
+}
+		 
+		
 		
 </script>
 </head>
