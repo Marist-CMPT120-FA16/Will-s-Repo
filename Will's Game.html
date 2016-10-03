@@ -20,11 +20,13 @@ function myNorthFunction() {
 		document.getElementById('points').innerHTML = "Points: " + points;
 		document.getElementById('taMain').value += "\nYou can't go here.";
    }else if(currentLocation =="south"){
-		document.getElementById('taMain').value += "\nYou are back in center."
-		currentLocation ="center"
-		}
-	
-	
+		document.getElementById('taMain').value += "\nYou are back in center.";
+		currentLocation ="center";
+   }else if(currentLocation ="east"){
+	    document.getElementById('taMain').value += "\nYou can't go here.";
+   }else if(currentLocation ="west"){
+	    document.getElementById('taMain').value += "\nYou can't go here."
+	}
 }
 function mySouthFunction() {
    if(firstSouth == false && currentLocation == "center"){
@@ -39,27 +41,48 @@ function mySouthFunction() {
    }else if(currentLocation ="north"){
 		document.getElementById('taMain').value +="\nYou are back in center.";
 		currentLocation = "center"
+   }else if(currentLocation = "east"){
+        document.getElementById('taMain').value +="\nYou can't go here.";
+   }	
 		}
 		
-}
 function myEastFunction() {
-   if(firstEast == false && currentLocation == "center"){
+    if(firstEast == false && currentLocation == "center"){
 		points += 5;
 		firstEast = true;
-        }
 		document.getElementById('points').innerHTML = "Points: " + points;
-        document.getElementById('taMain').value += "\nYou are now in the East.";
+		document.getElementById('taMain').value += "\nYou are now in the East.";
 		currentLocation = "east";
-   }
-function myWestFunction() {
-   if(firstWest == false){
-		points += 5;
-		firstWest = true;
-   }
-   document.getElementById('points').innerHTML = "Points: " + points;
-   document.getElementById('taMain').value += "\nYou are now in the West.";
+   }else if(currentLocation == "east"){
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou can't go here.";
+   }else if(currentLocation ="west"){
+		document.getElementById('taMain').value +="\nYou are back in center.";
+		currentLocation = "center"
+   }else if(currentLocation ="north"){
+		document.getElementById('taMain').value += "\nYou can't go here.";
+       } 
+	   
 }
-	
+function myWestFunction() {
+    if(firstWest == false && currentLocation == "center"){
+		points += 5;
+		firstEast = true;
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou are now in the West.";
+		currentLocation = "west";
+   }else if(currentLocation == "west"){
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou can't go here.";
+   }else if(currentLocation ="east"){
+		document.getElementById('taMain').value +="\nYou are back in center.";
+		currentLocation = "center"
+   }else if(currentLocation ="south"){
+        document.getElementById('taMain').value +="\nYou can't go here.";
+   
+   }	
+		}
+		
 </script>
 </head>
 
@@ -80,6 +103,11 @@ function myWestFunction() {
 <button onclick="mySouthFunction()">South</button>
 <button onclick="myEastFunction()">East</button>
 <button onclick="myWestFunction()">West</button>
+
+<p>
+Email me here at willespo22@yahoo.com:
+<a href="mailto:willespo22@yahoo.com?Subject=Will's%20Game" target="_top">Send Mail</a>
+</p>
 
  </body>
 </html>
