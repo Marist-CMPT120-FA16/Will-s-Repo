@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!-- William Esposito 
+3 October 2016
+Project 2- game -->
+<html lang="en-US">
+<head>
+	<meta charset="utf-8/">
+	<title>
+	Will's Game!
+	</title>
+<script>
+var firstNorth = false;
+var firstSouth = false;
+var firstWest = false;
+var firstEast = false;
+var northPress = 0;
+var currentLocation = "center";
+var points = 0;
+
+function btnGo_click(){
+	var command = document.getElementById("txtCommand").value;
+	    command = command.trim();
+        command = command.toLowerCase();
+		if ( command == "north" || command == "south" || command == "east" || command == "west") {
+		    command = command.substr(0,1);
+			}
+				if (command == "n") {
+					myNorthFunction(); 
+				} else if (command == "s") {
+					mySouthFunction(); 
+				} else if (command == "e") {
+				    myEastFunction();
+				}  else if (command == "w") {
+					myWestFunction(); 
+					}
+}
+
+function myNorthFunction() {
+   if(firstNorth == false && currentLocation == "center"){
+		points += 5;
+		firstNorth = true;
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou are now in the North.";
+		currentLocation = "north";
+   }else if(currentLocation == "north"){
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou can't go here.";
+   }else if(currentLocation =="south"){
+		document.getElementById('taMain').value += "\nYou are back in center.";
+		currentLocation ="center";
+   }else if(currentLocation =="east"){
+	    document.getElementById('taMain').value += "\nYou can't go here.";
+   }else if(currentLocation =="west"){
+	    document.getElementById('taMain').value += "\nYou can't go here."
+   }else if(currentLocation =="center"){
+         document.getElementById('taMain').value +="\nYou are now in the North.";
+		 currentLocation = "north";
+	}
+}
+function mySouthFunction() {
+   if(firstSouth == false && currentLocation == "center"){
+		points += 5;
+		firstSouth = true;
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou are now in the South.";
+		currentLocation = "south";
+   }else if(currentLocation == "south"){
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou can't go here.";  
+   }else if(currentLocation =="north"){
+		document.getElementById('taMain').value +="\nYou are back in center.";
+		currentLocation = "center"
+   }else if(currentLocation == "east"){
+        document.getElementById('taMain').value +="\nYou can't go here.";
+   }else if(currentLocation =="west"){
+	    document.getElementById('taMain').value +="\nYou can't go here.";
+   }else if(currentLocation =="center"){
+         document.getElementById('taMain').value +="\nYou are now in the South.";
+		 currentLocation = "south";
+   }
+	console.log(currentLocation);
+}
+		
+function myEastFunction() {
+    if(firstEast == false && currentLocation == "center"){
+		points += 5;
+		firstEast = true;
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou are now in the East.";
+		currentLocation = "east";
+   }else if(currentLocation == "east"){
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou can't go here.";
+   }else if(currentLocation =="west"){
+		document.getElementById('taMain').value +="\nYou are back in center.";
+		currentLocation = "center"
+   }else if(currentLocation =="north"){
+		document.getElementById('taMain').value += "\nYou can't go here.";  
+   }else if(currentLocation =="south"){
+		document.getElementById('taMain').value += "\nYou can't go here.";
+   }else if(currentLocation == "center"){
+	    document.getElementById('taMain').value += "\nYou are now in the East.";
+		currentLocation ="east";
+   }
+		
+	console.log(currentLocation);	
+}			   
+function myWestFunction() {
+    if(firstWest == false && currentLocation == "center"){
+		points += 5;
+		firstEast = true;
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou are now in the West.";
+		currentLocation = "west";
+   }else if(currentLocation == "west"){
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou can't go here.";
+   }else if(currentLocation =="east"){
+		document.getElementById('taMain').value +="\nYou are back in center.";
+		currentLocation = "center"
+   }else if(currentLocation =="south"){
+        document.getElementById('taMain').value +="\nYou can't go here."; 
+   }else if(currentLocation =="north"){
+        document.getElementById('taMain').value +="\nYou can't go here."; 
+   }else if(currentLocation =="center"){
+	    document.getElementById('taMain').value +="\nYou are now in the West.";
+		currentLocation ="west";
+   }
+	console.log(currentLocation);
+}
+		 
+		
+		
+</script>
+</head>
+
+
+
+
+
+
+<body>
+
+<h1 style="font-family:impact;font-size:600%;color:red;"> Will's Game!</h1>
+<h2 id = "points">Points: 0</h2>
+
+<p><textarea id="taMain" rows="25" cols="80">You are in the starting area</textarea></p>
+
+ <input type="text" 
+              id = "txtCommand"
+              name="txtCommand">
+
+       <input type="button"
+              value="Go" 
+              onclick="btnGo_click();" /> 
+
+<br>
+<button onclick="myNorthFunction()">North</button>
+<button onclick="mySouthFunction()">South</button>
+<button onclick="myEastFunction()">East</button>
+<button onclick="myWestFunction()">West</button>
+
+<p>
+Email me here at willespo22@yahoo.com:
+<a href="mailto:willespo22@yahoo.com?Subject=Will's%20Game" target="_top">Send Mail</a>
+</p>
+
+ </body>
+</html>
+	
