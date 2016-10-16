@@ -13,6 +13,7 @@ var firstNorth = false;
 var firstSouth = false;
 var firstWest = false;
 var firstEast = false;
+var firstGreaterNorth = false;
 var northPress = 0;
 var currentLocation = "center";
 var points = 0;
@@ -42,9 +43,20 @@ function myNorthFunction() {
 		document.getElementById('points').innerHTML = "Points: " + points;
 		document.getElementById('taMain').value += "\nYou are now in the North.";
 		currentLocation = "north";
-   }else if(currentLocation == "north"){
+   }else if(currentLocation == "north" && firstGreaterNorth ==false){
+		points += 5;
+		firstGreaterNorth = true;
 		document.getElementById('points').innerHTML = "Points: " + points;
-		document.getElementById('taMain').value += "\nYou can't go here.";
+		document.getElementById('taMain').value += "\nYou are even greater North.";
+		currentLocation ="greater north"
+    }else if(currentLocation == "north"){
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou are even greater North.";
+		currentLocation ="greater north"
+   }else if(currentLocation == "greater north"){
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou can't go here."	
+        currentLocation ="greater north" 
    }else if(currentLocation =="south"){
 		document.getElementById('taMain').value += "\nYou are back in center.";
 		currentLocation ="center";
@@ -64,6 +76,10 @@ function mySouthFunction() {
 		document.getElementById('points').innerHTML = "Points: " + points;
 		document.getElementById('taMain').value += "\nYou are now in the South.";
 		currentLocation = "south";
+   }else if(currentLocation == "greater north"){
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou are back in the North."
+		currentLocation = "north"
    }else if(currentLocation == "south"){
 		document.getElementById('points').innerHTML = "Points: " + points;
 		document.getElementById('taMain').value += "\nYou can't go here.";  
@@ -91,6 +107,9 @@ function myEastFunction() {
    }else if(currentLocation == "east"){
 		document.getElementById('points').innerHTML = "Points: " + points;
 		document.getElementById('taMain').value += "\nYou can't go here.";
+   }else if(currentLocation == "greater north"){
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou can't go here."
    }else if(currentLocation =="west"){
 		document.getElementById('taMain').value +="\nYou are back in center.";
 		currentLocation = "center"
@@ -108,13 +127,16 @@ function myEastFunction() {
 function myWestFunction() {
     if(firstWest == false && currentLocation == "center"){
 		points += 5;
-		firstEast = true;
+		firstWest = true;
 		document.getElementById('points').innerHTML = "Points: " + points;
 		document.getElementById('taMain').value += "\nYou are now in the West.";
 		currentLocation = "west";
    }else if(currentLocation == "west"){
 		document.getElementById('points').innerHTML = "Points: " + points;
 		document.getElementById('taMain').value += "\nYou can't go here.";
+   }else if(currentLocation == "greater north"){
+		document.getElementById('points').innerHTML = "Points: " + points;
+		document.getElementById('taMain').value += "\nYou can't go here."
    }else if(currentLocation =="east"){
 		document.getElementById('taMain').value +="\nYou are back in center.";
 		currentLocation = "center"
