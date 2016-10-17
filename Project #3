@@ -9,58 +9,160 @@ Project 3 game -->
 	Will's Game!
 	</title>
 <script>
-var firstNorth = false;
-var firstSouth = false;
-var firstWest = false;
-var firstEast = false;
-var firstGreaterNorth = false;
-var firstGreaterSouth = false;
+var visitedNorth = false;
+var visitedSouth = false;
+var visitedWest = false;
+var visitedEast = false;
+var visitedGreaterNorth = false;
+var visitedGreaterSouth = false;
 var northPress = 0;
 var currentLocation = "center";
 var points = 0;
 
-function updateDisplay(){
+function updateScore(){
+document.getElementById('points').innerHTML = "Points: " + points;
+}
+
+function displayError(){
+	updateDisplay("You can't go here");
+}
+	
+function checkLocation(){
 			var message = "";
 			switch (currentLocation){
-			case 0: message = "You are in the center";
-				break;
-			case 1: message = "You are now in the North.";
-					break;
-			case 2: message = "You are now in the South.";
-					break;
-			case 3: message = "You are in the East";
-					break;
-			case 4: message = "You are in the West";
-					break;
-			case 5: message = "You are in the greater North";
+			case "center": locationCenter();
 				    break;
-			case 6: message = "You are in the greater South";
+			case "north": locationNorth();
+					break;
+			case "south": locationSouth();
+					break;
+			case "east": locationEast();
+					break;
+			case "west": locationWest();
+					break;
+			case "greaterNorth": locationGreaterNorth();
+				    break;
+			case "greaterSouth": locationGreaterSouth();
 				    break;
 			}
-			document.getElementById("taMain").innerHTML = message;
+			
 		}
 
 
+function handleMovement(dir) {
+  var error = false;
+  if (dir == 'n' && currentLocation == "center"){
+	  currentLocation = "north";
+  }else if (dir == 's' && currentLocation == "center"){
+      currentLocation = "south"; 
+  }else if (dir == 'e' && currentLocation == "center"){
+	  currentLocation = "east";
+  }else if (dir == 'w' && currentLocation == "center" ){
+	  currentLocation = "west";
+  }else if (dir == 'n' && currentLocation == "north"){
+      currentLocation = "greaterNorth";
+  }else if (dir == 's' && currentLocation == "greaterNorth"){
+	  currentLocation = "north";
+  }else if (dir =='w' && currentLocation == "east"){
+	  currentLocation = "center";
+  }else if (dir =='e' && currentLocation == "west"){
+	  currentLocation = "center";
+  }else if (dir =='s' && currentLocation == "north"){
+	  currentLocation = "center";
+  }else if (dir =='s' && currentLocation == "south"){
+	  currentLocation = "greaterSouth";
+  }else if (dir =='n' && currentLocation == "greaterSouth"){
+      currentLocation = "south";
+  }else if (dir =='n' && currentLocation == "south"){
+	  currentLocation = "center";
+  }else{
+	displayError();
+	error = true;
+  }
+  if (error == false){
+	checkLocation();
+  }
+}
 
 
 
 
+
+		
 function locationNorth(){
-	updateDisplay()
-	currentLocation = 1;
-	}
+	 var message = "You are now in the North."
+	 updateDisplay(message);
+	 if (visitedNorth == false){
+		points += 5
+		updateScore();
+		visitedNorth = true;
+	 }
+  
+}
 
+	function locationSouth() {
+		var message = "You are now in the South."
+		updateDisplay(message);
+	    if (visitedSouth == false){
+			points += 5
+			updateScore();
+			visitedSouth = true;
+	 }
+    
+}	
+
+function locationEast(){
+	var message = "You are now in the East."
+	updateDisplay(message);
+	if (visitedEast == false){
+		points += 5
+		updateScore();
+		visitedEast = true;
+	 }	 
+    
+}
+
+	function locationWest(){
+    var message = "You are now in the West."
+	updateDisplay(message);
+	if (visitedWest == false){
+		points += 5
+		updateScore();
+		visitedWest = true;
+	 }
+     
+}	 
+
+function locationGreaterNorth(){
+	var message = "You are now in the Greater North."
+	updateDisplay(message);
+	if (visitedGreaterNorth == false){
+		points += 5
+		updateScore();
+		visitedGreaterNorth = true;
+	 }
+    
+}
+
+function locationGreaterSouth(){
+	var message = "You are now in the Greater South."
+	updateDisplay(message);
+	if (visitedGreaterSouth == false){
+		points += 5
+		updateScore();
+		visitedGreaterSouth = true;
+	 }	
+    
+}	
+
+function locationCenter(){
+	var message = "You are in the Center."
+	updateDisplay(message);
 		
-		
-function locationSouth() {
-	updateDisplay();
-	currentLocation = 2; 
-	}
-
-
-
-
-function btnGo_click(){
+	
+}	
+	
+	function btnGo_click(){
 	var command = document.getElementById("txtCommand").value;
 	    command = command.trim();
         command = command.toLowerCase();
@@ -75,82 +177,34 @@ function btnGo_click(){
 				    myEastFunction();
 				}  else if (command == "w") {
 					myWestFunction(); 
-				} else displayMessage("Invalid command." +"\n" + "Valid commands are: North, South, East, West, N, S, E, W, n, s, e, w")
-
+				} else {
+					updateDisplay("Invalid command." +"\n" + "Valid commands are: North, South, East, West, N, S, E, W, n, s, e, w.")
+			    }
 }
 
 function myNorthFunction() {
-	locationNorth();
+	handleMovement('n');
 	}
 function mySouthFunction() {
-   locationSouth();
-   }
+   handleMovement('s');
+}	
 	console.log(currentLocation);
 
 		
 function myEastFunction() {
-    if(firstEast == false && currentLocation == "center"){
-		points += 5;
-		firstEast = true;
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You are now in the East.");
-		currentLocation = "east";
-   }else if(currentLocation == "east"){
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You can't go here.");
-   }else if(currentLocation == "greater north"){
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You can't go here.");
-   }else if(currentLocation == "greater south"){
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You can't go here.");
-   }else if(currentLocation =="west"){
-		displayMessage("You are back in center.");
-		currentLocation = "center"
-   }else if(currentLocation =="north"){
-		displayMessage("You can't go here.");  
-   }else if(currentLocation =="south"){
-		displayMessage("You can't go here.");
-   }else if(currentLocation == "center"){
-	    displayMessage("You are now in the East.");
-		currentLocation ="east";
+    handleMovement('e');
    }
 		
 	console.log(currentLocation);	
-}			   
+			   
 function myWestFunction() {
-    if(firstWest == false && currentLocation == "center"){
-		points += 5;
-		firstWest = true;
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You are now in the West.");
-		currentLocation = "west";
-   }else if(currentLocation == "west"){
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You can't go here.");
-   }else if(currentLocation == "greater north"){
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You can't go here.");
-   }else if(currentLocation == "greater south"){
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You can't go here.");
-   }else if(currentLocation =="east"){
-		displayMessage("You are back in center.");
-		currentLocation = "center";
-   }else if(currentLocation =="south"){
-        displayMessage("You can't go here.");
-   }else if(currentLocation =="north"){
-        displayMessage("You can't go here."); 
-   }else if(currentLocation =="center"){
-	    displayMessage("You are now in the West.");
-		currentLocation ="west";
+    handleMovement('w');
    }
 	console.log(currentLocation);
-}
+
 		 
-	function displayMessage(msg) {
-            var target = document.getElementById("taMain");
-            target.value = msg + "\n" + target.value ;	
+	function updateDisplay(message) {
+            var target = document.getElementById("taMain").innerHTML += message + "\n";	
 }		
 </script>
 </head>
@@ -165,7 +219,8 @@ function myWestFunction() {
 <h1 style="font-family:impact;font-size:600%;color:red;"> Will's Game!</h1>
 <h2 id = "points">Points: 0</h2>
 
-<p><textarea id="taMain" rows="25" cols="80">You are in the starting area</textarea></p>
+<p><textarea id="taMain" rows="25" cols="80">You are in the starting area
+</textarea></p>
 
  <input type="text" 
               id = "txtCommand"
