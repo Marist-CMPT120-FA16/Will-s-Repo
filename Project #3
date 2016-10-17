@@ -53,7 +53,7 @@ function myNorthFunction() {
 		currentLocation ="greater north"
     }else if(currentLocation == "north"){
 		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You are back in the even greater North.");
+		displayMessage("You are back in the greater North.");
 		currentLocation ="greater north"
    }else if(currentLocation == "greater north"){
 		document.getElementById('points').innerHTML = "Points: " + points;
@@ -90,7 +90,7 @@ function mySouthFunction() {
 		points += 5;
 		firstGreaterSouth = true;
 		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You are now in the even greater South.");
+		displayMessage("You are now in the greater South.");
 		currentLocation ="greater south"
    }else if(currentLocation == "greater south"){
 		document.getElementById('points').innerHTML = "Points: " + points;
@@ -160,7 +160,7 @@ function myWestFunction() {
 		displayMessage("You can't go here.");
    }else if(currentLocation =="east"){
 		displayMessage("You are back in center.");
-		currentLocation = "center"
+		currentLocation = "center";
    }else if(currentLocation =="south"){
         displayMessage("You can't go here.");
    }else if(currentLocation =="north"){
