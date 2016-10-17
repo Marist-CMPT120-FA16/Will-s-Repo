@@ -34,7 +34,8 @@ function btnGo_click(){
 				    myEastFunction();
 				}  else if (command == "w") {
 					myWestFunction(); 
-					}
+				} else displayMessage("Invalid command." +"\n" + "Valid commands are: North, South, East, West, N, S, E, W, n, s, e, w")
+
 }
 
 function myNorthFunction() {
