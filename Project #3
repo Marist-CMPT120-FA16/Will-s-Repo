@@ -19,6 +19,47 @@ var northPress = 0;
 var currentLocation = "center";
 var points = 0;
 
+function updateDisplay(){
+			var message = "";
+			switch (currentLocation){
+			case 0: message = "You are in the center";
+				break;
+			case 1: message = "You are now in the North.";
+					break;
+			case 2: message = "You are now in the South.";
+					break;
+			case 3: message = "You are in the East";
+					break;
+			case 4: message = "You are in the West";
+					break;
+			case 5: message = "You are in the greater North";
+				    break;
+			case 6: message = "You are in the greater South";
+				    break;
+			}
+			document.getElementById("taMain").innerHTML = message;
+		}
+
+
+
+
+
+
+function locationNorth(){
+	updateDisplay()
+	currentLocation = 1;
+	}
+
+		
+		
+function locationSouth() {
+	updateDisplay();
+	currentLocation = 2; 
+	}
+
+
+
+
 function btnGo_click(){
 	var command = document.getElementById("txtCommand").value;
 	    command = command.trim();
@@ -39,78 +80,13 @@ function btnGo_click(){
 }
 
 function myNorthFunction() {
-   if(firstNorth == false && currentLocation == "center"){
-		points += 5;
-		firstNorth = true;
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You are now in the North.");
-		currentLocation = "north";
-   }else if(currentLocation == "north" && firstGreaterNorth ==false){
-		points += 5;
-		firstGreaterNorth = true;
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You are now in the greater North.");
-		currentLocation ="greater north"
-    }else if(currentLocation == "north"){
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You are back in the greater North.");
-		currentLocation ="greater north"
-   }else if(currentLocation == "greater north"){
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You can't go here.");	
-        currentLocation ="greater north" 
-   }else if(currentLocation == "greater south"){
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You are back in the South.");
-		currentLocation="south"
-   }else if(currentLocation =="south"){
-		displayMessage("You are back in center.");
-		currentLocation ="center";
-   }else if(currentLocation =="east"){
-	    displayMessage("You can't go here.");
-   }else if(currentLocation =="west"){
-	    displayMessage("You can't go here.");
-   }else if(currentLocation =="center"){
-         displayMessage("You are now in the North.");
-		 currentLocation = "north";
+	locationNorth();
 	}
-}
 function mySouthFunction() {
-   if(firstSouth == false && currentLocation == "center"){
-		points += 5;
-		firstSouth = true;
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You are now in the South.");
-		currentLocation = "south";
-   }else if(currentLocation == "greater north"){
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You are back in the North.")
-		currentLocation = "north"
-   }else if(currentLocation == "south" && firstGreaterSouth ==false){
-		points += 5;
-		firstGreaterSouth = true;
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You are now in the greater South.");
-		currentLocation ="greater south"
-   }else if(currentLocation == "greater south"){
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You can't go here.");	
-   }else if(currentLocation == "south"){
-		document.getElementById('points').innerHTML = "Points: " + points;
-		displayMessage("You can't go here.");  
-   }else if(currentLocation =="north"){
-		displayMessage("You are back in center.");
-		currentLocation = "center"
-   }else if(currentLocation == "east"){
-        displayMessage("You can't go here.");
-   }else if(currentLocation =="west"){
-	    displayMessage("You can't go here.");
-   }else if(currentLocation =="center"){
-         displayMessage("\nYou are now in the South.");
-		 currentLocation = "south";
+   locationSouth();
    }
 	console.log(currentLocation);
-}
+
 		
 function myEastFunction() {
     if(firstEast == false && currentLocation == "center"){
