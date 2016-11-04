@@ -15,11 +15,13 @@ var visitedWest = false;
 var visitedEast = false;
 var visitedGreaterNorth = false;
 var visitedGreaterSouth = false;
+var visitedGreaterWest= false;
 var northPress = 0;
 var currentLocation = "center";
 var points = 0;
 var greaterNorthitem = false
 var greaterSouthitem = false
+
 
 function updateScore(){
 document.getElementById('points').innerHTML = "Points: " + points;
@@ -46,7 +48,10 @@ function checkLocation(){
 				    break;
 			case "greaterSouth": locationGreaterSouth();
 				    break;
+			case "greaterWest": locationGreaterWest();
+				    break;
 			}
+			
 			
 		}
 
@@ -77,6 +82,13 @@ function handleMovement(dir) {
       currentLocation = "south";
   }else if (dir =='n' && currentLocation == "south"){
 	  currentLocation = "center";
+  }else if (dir =='w' && currentLocation == "west"){
+	  currentLocation = "greaterWest";
+  }else if (dir =='e' && currentLocation =="greaterWest"){
+	  currentLocation = "west"
+  
+  
+  
   }else{
 	displayError();
 	error = true;
@@ -87,10 +99,27 @@ function handleMovement(dir) {
 }
 
 
-
+function locationGreaterWest(){
+	 var message = "You are now in the Greater West."
+	 updateDisplay(message);
+	 document.getElementById("Eastbutton").disabled = false;
+	 document.getElementById("Westbutton").disabled = true;
+     document.getElementById("Northbutton").disabled = true;
+	 document.getElementById("Southbutton").disabled = true;
+	 if (visitedGreaterWest == false){
+		points += 5
+		updateScore();
+		visitedGreaterWest = true;
+	 }
+	 
+	 
+	 
+	 
+}
 
 
 		
+
 function locationNorth(){
 	 var message = "You are now in the North."
 	 updateDisplay(message);
