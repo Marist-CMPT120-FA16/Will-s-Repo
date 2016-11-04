@@ -15,13 +15,16 @@ var visitedWest = false;
 var visitedEast = false;
 var visitedGreaterNorth = false;
 var visitedGreaterSouth = false;
-var visitedGreaterWest= false;
+var visitedGreaterEast = false;
+var visitedGreaterWest = false;
+var visitedEvenGreaterNorth = false;
 var northPress = 0;
 var currentLocation = "center";
 var points = 0;
-var greaterNorthitem = false
-var greaterSouthitem = false
-
+var greaterNorthitem = false;
+var greaterSouthitem = false;
+var greaterEastitem = false;
+var greaterWestitem= false;
 
 function updateScore(){
 document.getElementById('points').innerHTML = "Points: " + points;
@@ -48,8 +51,12 @@ function checkLocation(){
 				    break;
 			case "greaterSouth": locationGreaterSouth();
 				    break;
+			case "greaterEast": locationGreaterEast();
+					break;
 			case "greaterWest": locationGreaterWest();
 				    break;
+			case "evenGreaterNorth": locationEvenGreaterNorth();
+					break;
 			}
 			
 			
@@ -86,7 +93,14 @@ function handleMovement(dir) {
 	  currentLocation = "greaterWest";
   }else if (dir =='e' && currentLocation =="greaterWest"){
 	  currentLocation = "west"
-  
+  }else if(dir == 'e' && currentLocation =="east"){
+	  currentLocation = "greaterEast";
+  }else if(dir == 'n' && currentLocation == "greaterNorth"){
+	  currentLocation = "evenGreaterNorth";
+  }else if(dir =='s' && currentLocation == "evenGreaterNorth"){
+	  currentLocation = "greaterNorth";
+  }else if(dir =='w' && currentLocation == "greaterEast"){
+	  currentLocation = "east";
   
   
   }else{
@@ -98,6 +112,43 @@ function handleMovement(dir) {
   }
 }
 
+function locationEvenGreaterNorth(){
+	 var message = "You are now in the Even Greater North."
+	 updateDisplay(message);
+	 document.getElementById("Eastbutton").disabled = true;
+	 document.getElementById("Westbutton").disabled = true;
+     document.getElementById("Northbutton").disabled = true;
+	 document.getElementById("Southbutton").disabled = false;
+	 if (visitedEvenGreaterNorth == false){
+		points += 5
+		updateScore();
+		visitedEvenGreaterNortht = true;
+	 }
+
+	 
+	 
+	 }
+
+
+
+function locationGreaterEast(){
+	 var message = "You are now in the Greater East."
+	 updateDisplay(message);
+	 document.getElementById("Eastbutton").disabled = true;
+	 document.getElementById("Westbutton").disabled = false;
+     document.getElementById("Northbutton").disabled = true;
+	 document.getElementById("Southbutton").disabled = true;
+	 if (greaterEastitem == false){
+	updateDisplay("There is a Greater East item.")
+	 }if (visitedGreaterEast == false){
+		points += 5
+		updateScore();
+		visitedGreaterEast = true;
+	 }
+
+}
+
+
 
 function locationGreaterWest(){
 	 var message = "You are now in the Greater West."
@@ -106,7 +157,9 @@ function locationGreaterWest(){
 	 document.getElementById("Westbutton").disabled = true;
      document.getElementById("Northbutton").disabled = true;
 	 document.getElementById("Southbutton").disabled = true;
-	 if (visitedGreaterWest == false){
+	 if (greaterWestitem ==false){
+	 updateDisplay("There is a Greater West item.")
+	 }if (visitedGreaterWest == false){
 		points += 5
 		updateScore();
 		visitedGreaterWest = true;
@@ -186,7 +239,7 @@ function locationGreaterNorth(){
 	document.getElementById("Eastbutton").disabled = true;
 	document.getElementById("Westbutton").disabled = true;
 	document.getElementById("Southbutton").disabled = false;
-	document.getElementById("Northbutton").disabled = true;
+	document.getElementById("Northbutton").disabled = false;
 	if (greaterNorthitem == false){
 	updateDisplay("There is a Greater North item.")
 	}if (visitedGreaterNorth == false){
@@ -256,8 +309,11 @@ function myListFunction() {
 	updateDisplay("You have the Greater North item.");
    }if(greaterSouthitem == true) {
 	updateDisplay("You have the Greater South item.");
-}
-	
+   }if(greaterEastitem ==true){
+	updateDisplay("You have the Greater East item.")
+   }if(greaterWestitem ==true){
+	updateDisplay("You have the Greater West item.")
+   }
 }
 
 
@@ -270,8 +326,13 @@ function myTakeFunction() {
       }else if(currentLocation == "greaterSouth" && greaterSouthitem == false){
 		updateDisplay("You now have the Greater South item.");
 		greaterSouthitem = true;
-	  }
-		
+	  }else if(currentLocation =="greaterEast" && greaterEastitem == false){
+		updateDisplay("You now have the Greater East item.");
+		greaterEastitem = true;
+     }else if(currentLocation =="greaterWest" && greaterWestitem ==false){
+		updateDisplay("You now have the Greater West item.");
+		greaterWestitem = true;
+	 }
 }
 
 
