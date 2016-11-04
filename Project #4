@@ -19,6 +19,7 @@ var northPress = 0;
 var currentLocation = "center";
 var points = 0;
 var greaterNorthitem = false
+var greaterSouthitem = false
 
 function updateScore(){
 document.getElementById('points').innerHTML = "Points: " + points;
@@ -76,13 +77,6 @@ function handleMovement(dir) {
       currentLocation = "south";
   }else if (dir =='n' && currentLocation == "south"){
 	  currentLocation = "center";
-  } else if (dir =='l'){
-	if(greaterNorthitem == true){
-		updateDisplay("You have the Greater North Item");
-	
-	}
-  
-  
   }else{
 	displayError();
 	error = true;
@@ -181,7 +175,9 @@ function locationGreaterSouth(){
 	document.getElementById("Westbutton").disabled = true;
 	document.getElementById("Southbutton").disabled = true;
 	document.getElementById("Northbutton").disabled = false;
-	if (visitedGreaterSouth == false){
+	if (greaterSouthitem == false){
+	updateDisplay("There is a Greater South item.")
+	}if (visitedGreaterSouth == false){
 		points += 5
 		updateScore();
 		visitedGreaterSouth = true;
@@ -229,7 +225,9 @@ function myListFunction() {
 	updateDisplay("Here are the items you have")
 	if(greaterNorthitem == true){
 	updateDisplay("You have the Greater North item.");
-    }
+   }if(greaterSouthitem == true) {
+	updateDisplay("You have the Greater South item.");
+}
 	
 }
 
@@ -237,10 +235,13 @@ function myListFunction() {
 
 
 function myTakeFunction() {
-		if(greaterNorthitem == false){
+		if(currentLocation == "greaterNorth" && greaterNorthitem == false){
 		updateDisplay("You now have the Greater North item.");
 		greaterNorthitem = true;
-      }
+      }else if(currentLocation == "greaterSouth" && greaterSouthitem == false){
+		updateDisplay("You now have the Greater South item.");
+		greaterSouthitem = true;
+	  }
 		
 }
 
