@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- William Esposito 
-17 October 2016
-Project 3 game -->
+November 8
+Project 4 game -->
 <html lang="en-US">
 <head>
 	<meta charset="utf-8/">
@@ -245,6 +245,7 @@ function init() {
 <button id="Westbutton"onclick="myWestFunction()">West</button>
 <button id="Helpbutton" onclick="myHelpFunction()">Help</button>
 <button id="Inventorybutton" onclick="myListFunction()">Inventory</button>
+<button id="Takebutton" onclick="myTakeFunction()">Take</button>
 <p>
 Email me here at willespo22@yahoo.com:
 <a href="mailto:willespo22@yahoo.com?Subject=Will's%20Game" target="_top">Send Mail</a>
