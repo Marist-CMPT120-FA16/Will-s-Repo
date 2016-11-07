@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+<script>
+
+var arr = []
+while(arr.length < 25){
+    var randomnumber = Math.ceil(Math.random()*365)
+    if(arr.indexOf(randomnumber) > -1) continue;
+    arr[arr.length] = randomnumber;
+	Number()
+	arr.sort(function(a, b){return a-b});
+}
+document.write(arr);
+
+
+
+
+</script>
+
+
+
+</head>
