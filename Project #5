@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!-- William Esposito 
+November 8
+Project 4 game -->
+<html lang="en-US">
+<head>
+	<meta charset="utf-8/">
+	<title>
+	Will's Game!
+	</title>
+<script type="text/javascript" src="locations.js"></script>
+<script>
+var visitedNorth = false;
+var visitedSouth = false;
+var visitedWest = false;
+var visitedEast = false;
+var visitedGreaterNorth = false;
+var visitedGreaterSouth = false;
+var visitedGreaterEast = false;
+var visitedGreaterWest = false;
+var visitedEvenGreaterNorth = false;
+var northPress = 0;
+var currentLocation = "center";
+var points = 0;
+var greaterNorthitem = false;
+var greaterSouthitem = false;
+var greaterEastitem = false;
+var greaterWestitem= false;
+var visitedEvenGreaterSouth = false;
+
+function updateScore(){
+document.getElementById('points').innerHTML = "Points: " + points;
+}
+
+function displayError(){
+	updateDisplay("You can't go here");
+}
+function player(curLocation,inventory){
+	this.curLocation = curLocation;
+	this.inventory = inventory;
+}
+function checkLocation(){
+			var message = "";
+			var location = locationObject[currentLocation];
+			updateDisplay(location);
+			if(location.item == undefined){
+			}else{
+				if(location.item.taken == false){
+					updateDisplay(location.item)			
+				}else{
+				}
+			}
+			console.log(location.name);
+			location.handler();
+
+			
+		}
+
+
+function handleMovement(dir) {
+  var error = false;
+  if (dir == 'n' && currentLocation == "center"){
+	  currentLocation = "north";
+  }else if (dir == 's' && currentLocation == "center"){
+      currentLocation = "south"; 
+  }else if (dir == 'e' && currentLocation == "center"){
+	  currentLocation = "east";
+  }else if (dir == 'w' && currentLocation == "center" ){
+	  currentLocation = "west";
+  }else if (dir == 'n' && currentLocation == "north"){
+      currentLocation = "greaterNorth";
+  }else if (dir == 's' && currentLocation == "greaterNorth"){
+	  currentLocation = "north";
+  }else if (dir =='w' && currentLocation == "east"){
+	  currentLocation = "center";
+  }else if (dir =='e' && currentLocation == "west"){
+	  currentLocation = "center";
+  }else if (dir =='s' && currentLocation == "north"){
+	  currentLocation = "center";
+  }else if (dir =='s' && currentLocation == "south"){
+	  currentLocation = "greaterSouth";
+  }else if (dir =='n' && currentLocation == "greaterSouth"){
+      currentLocation = "south";
+  }else if (dir =='n' && currentLocation == "south"){
+	  currentLocation = "center";
+  }else if (dir =='w' && currentLocation == "west"){
+	  currentLocation = "greaterWest";
+  }else if (dir =='e' && currentLocation =="greaterWest"){
+	  currentLocation = "west"
+  }else if(dir == 'e' && currentLocation =="east"){
+	  currentLocation = "greaterEast";
+  }else if(dir == 'n' && currentLocation == "greaterNorth"){
+	  currentLocation = "evenGreaterNorth";
+  }else if(dir =='s' && currentLocation == "evenGreaterNorth"){
+	  currentLocation = "greaterNorth";
+  }else if(dir =='w' && currentLocation == "greaterEast"){
+  	  currentLocation = "east";
+  }else if(dir =="s" && currentLocation == "greaterSouth"){
+  	  currentLocation = "evenGreaterSouth";
+  }else if(dir =="n" && currentLocation == "evenGreaterSouth"){
+  	  currentLocation = "greaterSouth";
+	
+  }else{
+	displayError();
+	error = true;
+  }
+  if (error == false){
+	checkLocation();
+  }
+}
+
+
+	
+	function btnGo_click(){
+	var command = document.getElementById("txtCommand").value;
+	    command = command.trim();
+        command = command.toLowerCase();
+		if ( command == "north" || command == "south" || command == "east" || command == "west" || command == "take" || command == "list") {
+		    command = command.substr(0,1);
+			}
+				if (command == "n") {
+					myNorthFunction(); 
+				} else if (command == "s") {
+					mySouthFunction(); 
+				} else if (command == "e") {
+				    myEastFunction();
+				}  else if (command == "w") {
+					myWestFunction(); 
+				}  else if (command == "t") {
+				    myTakeFunction();
+				}  else if (command == "l")  {
+					myListFunction();
+				} else {
+					updateDisplay("Invalid command." +"\n" + "Valid commands are: North, South, East, West, N, S, E, W, n, s, e, w. You can check inventory by typing list and you can take an object by typing take")
+			    }
+}
+
+
+
+function myListFunction() {
+	updateDisplay("Here are the items that you have.")
+	for (var i = 0; i < inventory.length; i++) {
+		updateDisplay(inventory[i].name);
+	}
+}
+
+
+
+
+
+
+function myTakeFunction() {
+		var location = locationObject[currentLocation];
+		if(location.item == undefined){
+			updateDisplay("There is no item here.")
+		}else{
+			if(location.item.taken == false){
+				updateDisplay("You have taken the item.")
+				location.item.taken = true
+				inventory.push(location.item);			
+			}else{
+				updateDisplay("You have already taken this item.")
+			}
+		}
+}
+
+
+
+
+
+function myNorthFunction() {
+	handleMovement('n');
+	}
+function mySouthFunction() {
+   handleMovement('s');
+}	
+	console.log(currentLocation);
+
+		
+function myEastFunction() {
+    handleMovement('e');
+   }
+		
+	console.log(currentLocation);	
+			   
+function myWestFunction() {
+    handleMovement('w');
+   }
+	console.log(currentLocation);
+
+		 
+	function updateDisplay(message) {
+            var target = document.getElementById("taMain").innerHTML += message + "\n";	
+}		
+
+
+function myHelpFunction() {
+	updateDisplay("You can move around by either clicking the directional buttons, or by typing the direction of which you want to go. You obtain 5 points for every location you visit for the first time. You can take an item by typing 'take', and you can see what you have in your inventory by either clicking the inventory button or typing 'list'. ")
+}
+
+
+
+function init() {
+   updateDisplay("Welcome to Will's Game! You are currently in the Center.");
+}
+
+
+</script>
+</head>
+
+
+
+
+
+
+<body onload="init()">
+
+<h1 style="font-family:impact;font-size:600%;color:red;"> Will's Game!</h1>
+<h2 id = "points">Points: 0</h2>
+
+<p><textarea id="taMain" rows="25" cols="80">
+</textarea></p>
+
+ <input type="text" 
+              id = "txtCommand"
+              name="txtCommand">
+
+       <input type="button"
+              value="Go" 
+              onclick="btnGo_click();" /> 
+
+<br>
+<button id="Northbutton"onclick="myNorthFunction()">North</button>
+<button id="Southbutton"onclick="mySouthFunction()">South</button>
+<button id="Eastbutton"onclick="myEastFunction()">East</button>
+<button id="Westbutton"onclick="myWestFunction()">West</button>
+<button id="Helpbutton" onclick="myHelpFunction()">Help</button>
+<button id="Inventorybutton" onclick="myListFunction()">Inventory</button>
+<button id="Takebutton" onclick="myTakeFunction()">Take</button>
+<p>
+Email me here at willespo22@yahoo.com:
+<a href="mailto:willespo22@yahoo.com?Subject=Will's%20Game" target="_top">Send Mail</a>
+</p>
+
+
+<img src="map.jpg" width="518" height="351" alt="Game Map"/>
+
+
+ </body>
+</html>
+	
