@@ -1,6 +1,5 @@
 function locationCenter(){
-	var message = "You are in the Center."
-	updateDisplay(message);
+	currentLocation = "center"
 	document.getElementById("Eastbutton").disabled = false;
 	document.getElementById("Westbutton").disabled = false;
 	document.getElementById("Northbutton").disabled = false;
@@ -10,15 +9,11 @@ function locationCenter(){
 
 
 function locationGreaterSouth(){
-	var message = "You are now in the Greater South."
-	updateDisplay(message);
 	document.getElementById("Eastbutton").disabled = true;
 	document.getElementById("Westbutton").disabled = true;
-	document.getElementById("Southbutton").disabled = true;
+	document.getElementById("Southbutton").disabled = false;
 	document.getElementById("Northbutton").disabled = false;
-	if (greaterSouthitem == false){
-	updateDisplay("There is a Greater South item.")
-	}if (visitedGreaterSouth == false){
+	if (visitedGreaterSouth == false){
 		points += 5
 		updateScore();
 		visitedGreaterSouth = true;
@@ -28,15 +23,11 @@ function locationGreaterSouth(){
 
 
 function locationGreaterNorth(){
-	var message = "You are now in the Greater North."
-	updateDisplay(message);
 	document.getElementById("Eastbutton").disabled = true;
 	document.getElementById("Westbutton").disabled = true;
 	document.getElementById("Southbutton").disabled = false;
 	document.getElementById("Northbutton").disabled = false;
-	if (greaterNorthitem == false){
-	updateDisplay("There is a Greater North item.")
-	}if (visitedGreaterNorth == false){
+	if (visitedGreaterNorth == false){
 		points += 5
 		updateScore();
 		visitedGreaterNorth = true;
@@ -46,8 +37,6 @@ function locationGreaterNorth(){
 
 
 function locationWest(){
-    var message = "You are now in the West."
-	updateDisplay(message);
 	document.getElementById("Northbutton").disabled = true;
 	document.getElementById("Southbutton").disabled = true;
 	document.getElementById("Eastbutton").disabled = false;
@@ -61,8 +50,6 @@ function locationWest(){
 }
 
 function locationEast(){
-	var message = "You are now in the East."
-	updateDisplay(message);
 	 document.getElementById("Northbutton").disabled = true;
 	 document.getElementById("Southbutton").disabled = true;
 	 document.getElementById("Eastbutton").disabled = false;
@@ -76,8 +63,6 @@ function locationEast(){
 }
 
 function locationSouth() {
-		var message = "You are now in the South."
-		updateDisplay(message);
 	    document.getElementById("Eastbutton").disabled = true;
 	     document.getElementById("Westbutton").disabled = true;
 		 document.getElementById("Northbutton").disabled = false;
@@ -91,8 +76,6 @@ function locationSouth() {
 }
 
 function locationNorth(){
-	 var message = "You are now in the North."
-	 updateDisplay(message);
 	 document.getElementById("Eastbutton").disabled = true;
 	 document.getElementById("Westbutton").disabled = true;
      document.getElementById("Northbutton").disabled = false;
@@ -106,15 +89,11 @@ function locationNorth(){
 }
 
 function locationGreaterWest(){
-	 var message = "You are now in the Greater West."
-	 updateDisplay(message);
 	 document.getElementById("Eastbutton").disabled = false;
 	 document.getElementById("Westbutton").disabled = true;
      document.getElementById("Northbutton").disabled = true;
 	 document.getElementById("Southbutton").disabled = true;
-	 if (greaterWestitem ==false){
-	 updateDisplay("There is a Greater West item.")
-	 }if (visitedGreaterWest == false){
+	 if (visitedGreaterWest == false){
 		points += 5
 		updateScore();
 		visitedGreaterWest = true;
@@ -127,15 +106,11 @@ function locationGreaterWest(){
 
 
 function locationGreaterEast(){
-	 var message = "You are now in the Greater East."
-	 updateDisplay(message);
 	 document.getElementById("Eastbutton").disabled = true;
 	 document.getElementById("Westbutton").disabled = false;
      document.getElementById("Northbutton").disabled = true;
 	 document.getElementById("Southbutton").disabled = true;
-	 if (greaterEastitem == false){
-	updateDisplay("There is a Greater East item.")
-	 }if (visitedGreaterEast == false){
+	 if (visitedGreaterEast == false){
 		points += 5
 		updateScore();
 		visitedGreaterEast = true;
@@ -145,8 +120,6 @@ function locationGreaterEast(){
 
 
 function locationEvenGreaterNorth(){
-	 var message = "You are now in the Even Greater North."
-	 updateDisplay(message);
 	 document.getElementById("Eastbutton").disabled = true;
 	 document.getElementById("Westbutton").disabled = true;
      document.getElementById("Northbutton").disabled = true;
@@ -154,26 +127,110 @@ function locationEvenGreaterNorth(){
 	 if (visitedEvenGreaterNorth == false){
 		points += 5
 		updateScore();
-		visitedEvenGreaterNortht = true;
+		visitedEvenGreaterNorth = true;
 	 }
 
 	 
 	 
 	 }
 
-	 function locationGreaterSouth(){
-	var message = "You are now in the Greater South."
-	updateDisplay(message);
-	document.getElementById("Eastbutton").disabled = true;
-	document.getElementById("Westbutton").disabled = true;
-	document.getElementById("Southbutton").disabled = true;
-	document.getElementById("Northbutton").disabled = false;
-	if (greaterSouthitem == false){
-	updateDisplay("There is a Greater South item.")
-	}if (visitedGreaterSouth == false){
+function locationEvenGreaterSouth(){
+	 document.getElementById("Eastbutton").disabled = true;
+	 document.getElementById("Westbutton").disabled = true;
+     document.getElementById("Northbutton").disabled = false;
+	 document.getElementById("Southbutton").disabled = true;
+	 if (visitedEvenGreaterSouth == false){
 		points += 5
 		updateScore();
-		visitedGreaterSouth = true;
-	 }	
-    
-}	
+		visitedEvenGreaterSouth = true;
+	 }
+}
+
+
+
+
+
+function item(id, name, description) {
+	this.id = id;
+	this.name = name;
+	this.description = description; 
+	this.taken = false;
+	this.toString = function () {
+		return this.description;
+	}
+}
+
+
+
+
+function Location(id, name, description, item, handler) {
+	this.id = id;
+	this.name = name;
+	this.description = description;
+	this.item = item;
+	this.visited = false;
+	this.handler = handler;
+	this.toString = function () {
+		return this.description;
+	}
+
+}
+
+
+
+var inventory = new Array();
+
+
+
+//items
+var items = new Array("Greater North item", "Greater South item", "Greater East item", "Greater West item.");
+
+var GreaterNorthitem = new item("GreaterNorthitem", "Greater North item", "There is a Greater North item.");
+
+var GreaterSouthitem = new item("GreaterSouthitem", "Greater South item", "There is a Greater South item.");
+
+var GreaterEastitem = new item("GreaterEastitem", "Greater East item", "There is a Greater East item.");
+
+var GreaterWestitem = new item("GreaterWestitem", "Greater West item", "There is a Greater West item.");
+
+
+//locations
+var locations = new Array( "center", "north", "south", "east", "west", "greaternorth", "greatersouth", "greatereast", "greaterwest", "evengreaternorth", "evengreatersouth");
+
+var locationCenter = new Location("center", "center", "You are in the Center." , undefined , locationCenter);
+
+var locationNorth = new Location("north", "north", "You are in the North.", "There is a North item", locationNorth);
+
+var locationSouth = new Location("south", "south", "You are in the South." , undefined, locationSouth);
+
+var locationEast = new Location("east", "east", "You are in the East.", undefined, locationEast);
+
+var locationWest = new Location("west", "west", "You are in the West.", undefined, locationWest);
+
+var locationGreaterNorth = new Location("GreaterNorth", "GreaterNorth", "You are in the Greater North." , GreaterNorthitem , locationGreaterNorth);
+
+var locationGreaterSouth = new Location("GreaterSouth", "GreaterSouth", "You are in the Greater South.", GreaterSouthitem, locationGreaterSouth);
+
+var locationGreaterEast = new Location("GreaterEast", "GreaterEast", "You are in the Greater East." , GreaterEastitem, locationGreaterEast);
+
+var locationGreaterWest = new Location("GreaterWest" , "GreaterWest", "You are in the Greater West." , GreaterWestitem, locationGreaterWest);
+
+var locationEvenGreaterNorth = new Location("EvenGreaterNorth", "EvenGreaterNorth", "You are in the Even Greater North.", undefined, locationEvenGreaterNorth);
+
+var locationEvenGreaterSouth = new Location("EvenGreaterSouth", "EvenGreaterSouth", "You are in the Even Greater South.", undefined, locationEvenGreaterSouth);
+
+
+
+var locationObject = {
+	"greaterNorth": locationGreaterNorth ,
+	"greaterSouth": locationGreaterSouth ,
+	"greaterEast": locationGreaterEast , 
+	"greaterWest": locationGreaterWest ,
+	"north": locationNorth ,
+	"south": locationSouth ,
+	"east": locationEast ,
+	"west" : locationWest , 
+	"evenGreaterNorth" : locationEvenGreaterNorth ,
+	"evenGreaterSouth" : locationEvenGreaterSouth ,
+	"center" : locationCenter 
+}
