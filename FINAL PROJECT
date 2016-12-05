@@ -197,7 +197,7 @@ function init() {
 
 <body onload="init()">
 
-<h1 style="font-family:impact;font-size:600%;color:red;"> Will's Game!</h1>
+<h1 style="font-family:impact;font-size:600%;color:red;"> Santa's Ride!</h1>
 <h2 id = "points">Points: 0</h2>
 
 <p><textarea id="taMain" rows="25" cols="80">
