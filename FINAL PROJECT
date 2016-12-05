@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<!-- William Esposito 
+December 5
+Final Project -->
+<html lang="en-US">
+<head>
+	<meta charset="utf-8/">
+	<title>
+	Will's Game!
+	</title>
+<script type="text/javascript" src="locations.js"></script>
+<script>
+var visitedNorth = false;
+var visitedSouth = false;
+var visitedWest = false;
+var visitedEast = false;
+var visitedGreaterNorth = false;
+var visitedGreaterSouth = false;
+var visitedGreaterEast = false;
+var visitedGreaterWest = false;
+var visitedEvenGreaterNorth = false;
+var northPress = 0;
+var currentLocation = CENTER;
+var points = 0;
+var greaterNorthitem = false;
+var greaterSouthitem = false;
+var greaterEastitem = false;
+var greaterWestitem= false;
+var visitedEvenGreaterSouth = false;
+
+
+function updateScore(){
+document.getElementById('points').innerHTML = "Points: " + points;
+}
+
+function displayError(){
+	updateDisplay("You can't go here");
+}
+function player(curLocation,inventory){
+	this.curLocation = curLocation;
+	this.inventory = inventory;
+}
+
+//Here is my Check Location function, the large if statement is checking to see if Santa has visited everywhere before going back to North Pole. 
+function checkLocation(){
+			var message = "";
+			var location = locationObject[currentLocation];
+				 if(currentLocation == EVENGREATERNORTH && !(locationObject[NORTH].visited && locationObject[SOUTH].visited && locationObject[EAST].visited && locationObject[WEST].visited && locationObject[GREATERNORTH].visited && locationObject[GREATERSOUTH].visited && locationObject[GREATEREAST].visited && locationObject[GREATERWEST].visited)){
+				 	updateDisplay("You can't go back to the North Pole yet! You have to visit everywhere else first!")
+			   		location = locationObject[GREATERNORTH]
+			   		currentLocation = GREATERNORTH
+			     }
+
+			updateDisplay(location);
+			if(location.item == undefined){
+			}else{
+				if(location.item.taken == false){
+					updateDisplay(location.item)			
+				}else{
+				}
+			}
+			console.log(location.name);
+			location.handler();
+			document.getElementById("Northbutton").disabled = location.button[0]
+	 		document.getElementById("Southbutton").disabled = location.button[1]
+    	 	document.getElementById("Eastbutton").disabled = location.button[2]
+	 		document.getElementById("Westbutton").disabled = location.button[3]
+
+	 		console.log(location.visited) 
+	 		
+	 		if(!location.visited){
+	 			points += 5
+				updateScore();
+				location.visited = true;
+	 		}
+			
+		}
+
+var map = [
+			  	 	  //[n  s  e  w]
+/*Center*/    			[NORTH, SOUTH, EAST, WEST],
+/*North*/     			[GREATERNORTH, CENTER, undefined, undefined],
+/*South*/     			[CENTER, GREATERSOUTH, undefined, undefined ],
+/*East*/      			[undefined, undefined, GREATEREAST, CENTER],
+/*West*/           		[undefined, undefined, CENTER, GREATERWEST],
+/*GreaterNorth*/   		[EVENGREATERNORTH, NORTH, undefined, undefined],
+/*GreaterSouth*/ 		[SOUTH,EVENGREATERSOUTH, undefined, undefined],
+/*GreaterEast*/     	[undefined, undefined, undefined ,EAST],
+/*GreaterWest*/     	[undefined, undefined, WEST, undefined],
+/*EvenGreaterNorth*/   	[9, 9, 8, 9]
+
+];
+
+
+	function btnGo_click(){
+	var command = document.getElementById("txtCommand").value;
+	    command = command.trim();
+        command = command.toLowerCase();
+		if ( command == "north" || command == "south" || command == "east" || command == "west" || command == "take" || command == "list") {
+		    command = command.substr(0,1);
+			}
+				if (command == "n") {
+					myNorthFunction(); 
+				} else if (command == "s") {
+					mySouthFunction(); 
+				} else if (command == "e") {
+				    myEastFunction();
+				}  else if (command == "w") {
+					myWestFunction(); 
+				}  else if (command == "t") {
+				    myTakeFunction();
+				}  else if (command == "l")  {
+					myListFunction();
+				} else {
+					updateDisplay("Invalid command." +"\n" + "Valid commands are: North, South, East, West, N, S, E, W, n, s, e, w. You can check inventory by typing list and you can take an object by typing take")
+			    }
+}
+
+
+
+function myListFunction() {
+	updateDisplay("Here are the items that you have.")
+	for (var i = 0; i < inventory.length; i++) {
+		updateDisplay(inventory[i].name);
+	}
+}
+
+
+
+
+
+
+function myTakeFunction() {
+		var location = locationObject[currentLocation];
+		if(location.item == undefined){
+			updateDisplay("There is no item here.")
+		}else{
+			if(location.item.taken == false){
+				updateDisplay("You have taken the item.")
+				location.item.taken = true
+				inventory.push(location.item);			
+			}else{
+				updateDisplay("You have already taken this item.")
+			}
+		}
+}
+
+
+
+
+
+function myNorthFunction() {
+	currentLocation = map[currentLocation][0];
+	checkLocation();
+	console.log(currentLocation);
+	}
+function mySouthFunction() {
+   currentLocation = map[currentLocation][1];
+	checkLocation();
+	console.log(currentLocation);
+}
+		
+function myEastFunction() {
+  currentLocation = map[currentLocation][2];
+	checkLocation();
+	console.log(currentLocation);
+}
+			   
+function myWestFunction() {
+ currentLocation = map[currentLocation][3];
+	checkLocation();
+	console.log(currentLocation);
+}
+	function updateDisplay(message) {
+            var target = document.getElementById("taMain").innerHTML += message + "\n";	
+}		
+
+
+function myHelpFunction() {
+	updateDisplay("You can move around by either clicking the directional buttons, or by typing the direction of which you want to go. You obtain 5 points for every location you visit for the first time. You can take an item by typing 'take', and you can see what you have in your inventory by either clicking the inventory button or typing 'list'. ")
+}
+
+
+
+function init() {
+   updateDisplay("Santa, it's Christmas Eve! You are currently flying somewhere over the Atlantic Ocean on your sleigh, jingle bells is playing on your radio, and you must make your way to all the good girls and boys so they may have presents beneath their Christmas tree. Where will you go first?");
+}
+
+
+</script>
+</head>
+
+
+
+
+
+
+<body onload="init()">
+
+<h1 style="font-family:impact;font-size:600%;color:red;"> Will's Game!</h1>
+<h2 id = "points">Points: 0</h2>
+
+<p><textarea id="taMain" rows="25" cols="80">
+</textarea></p>
+
+ <input type="text" 
+              id = "txtCommand"
+              name="txtCommand">
+
+       <input type="button"
+              value="Go" 
+              onclick="btnGo_click();" /> 
+
+<br>
+<button id="Northbutton"onclick="myNorthFunction()">North</button>
+<button id="Southbutton"onclick="mySouthFunction()">South</button>
+<button id="Eastbutton"onclick="myEastFunction()">East</button>
+<button id="Westbutton"onclick="myWestFunction()">West</button>
+<button id="Helpbutton" onclick="myHelpFunction()">Help</button>
+<button id="Inventorybutton" onclick="myListFunction()">Inventory</button>
+<button id="Takebutton" onclick="myTakeFunction()">Take</button>
+<p>
+Email me here at willespo22@yahoo.com:
+<a href="mailto:willespo22@yahoo.com?Subject=Will's%20Game" target="_top">Send Mail</a>
+</p>
+
+
+<img src="map.jpg" width="518" height="351" alt="Game Map"/>
+
+
+ </body>
+</html>
+	
